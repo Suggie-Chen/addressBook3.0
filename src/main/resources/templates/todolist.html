@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>TodoList</h2>
+    <a class="btn btn-primary float-right" href="./todoadd.html" th:href="@{/todo/add}">Add</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>tel</th>
+            <th>QQ</th>
+            <th>email</th>
+            <th>address</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+        <tr th:each="todo:${todos}" >
+            <td th:text="${todo.id}">1</td>
+            <td th:text="${todo.name}">上午8点教二240上课</td>
+            <td th:text="${todo.tel}">上午8点教二240上课</td>
+            <td th:text="${todo.QQ}">上午8点教二240上课</td>
+            <td th:text="${todo.email}">上午8点教二240上课</td>
+            <td>
+                <a type="button" class="btn btn-xs btn-success" href="./todoedit.html?todoId=1"
+                   th:href="@{/todo/edit(todoId=${todo.id})}">编辑</a>
+                <a type="button" class="btn  btn-xs btn-danger" href="./tododel?todoId=1"
+                   th:href="@{/todo/delete(todoId=${todo.id})}">删除</a>
+            </td>
+        </tr>
+<!--        <tr>-->
+<!--            <td>2</td>-->
+<!--            <td>下午2点教三130听报告</td>-->
+<!--            <td>-->
+<!--                <a type="button" class="btn  btn-xs btn-success" href="./todoedit.html?todoId=1">编辑</a>-->
+<!--                <a type="button" class="btn  btn-xs btn-danger" href="./tododel?todoId=1">删除</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+        </tbody>
+        <div>
+            <a th:href="@{/todo/list(start=0)}">[首页]</a>
+            <a th:if="${not todos.isFirst()}" th:href="@{/todo/list(start=${todos.number-1})}">[上页]</a>
+            <a th:if="${not todos.isLast()}" th:href="@{/todo/list(start=${todos.number+1})}">[下页]</a>
+            <a th:href="@{/todo/list(start=${todos.totalPages-1})}">[末页]</a>
+        </div>
+    </table>
+</div>
+
+</body>
+</html>
