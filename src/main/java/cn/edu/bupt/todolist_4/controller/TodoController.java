@@ -48,6 +48,26 @@ public class TodoController {
         return "success";
     }
 
+    @ResponseBody
+    @PostMapping("/checkphone")//通过ajax检查当前电话是否存在
+    public String checkphone( @RequestParam("tel")String tel){
+        List<Todo> todos = todoRepository.findAll();
+
+        System.out.println("控制器端接收到的tel="+tel);
+
+        String result="";
+        for (Todo each:todos
+        ) {
+            System.out.println(each.getTel());
+            if(each.getTel().equals(tel)){
+                result="success";
+                break;
+            }
+        }
+        System.out.println("控制器端result="+result);
+        return result;//否则返回"error"
+    }
+
     @GetMapping("/delete")
     String delete(@RequestParam Long todoId){
         todoRepository.deleteById(todoId);

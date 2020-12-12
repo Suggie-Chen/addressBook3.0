@@ -9,11 +9,14 @@
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 
+<!--    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>-->
+
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <div class="container">
@@ -25,14 +28,21 @@
         <div class="form-group">
             <label for="name">name:</label>
             <input type="text" class="form-control" id="name" name="name">
-            <label for="tel">tel:</label>
-            <input type="tel" class="form-control" id="tel" name="tel">
+
+            <label for="tel" >tel:</label>
+            <input type="tel" class="form-control" id="tel" name="tel" autocomplete="off " >
+            <text id="errorTel">这里是提示信息：</text>
+
             <label for="QQ">QQ:</label>
             <input type="text" class="form-control" id="QQ" name="QQ">
+
             <label for="email">email:</label>
             <input type="email" class="form-control" id="email" name="email">
+
             <label for="address">address:</label>
             <input type="text" class="form-control" id="address" name="address">
+
+
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -40,3 +50,46 @@
 
 </body>
 </html>
+
+
+<script>
+    $(document).ready(
+        //当增加页面 电话输入框变化时 发送ajax请求看是否电话已存在
+        $("#tel").bind("input propertychange",function() {
+            var temp = $("#tel").val()
+            console.log("hahahahahahahahah"+temp)
+            $.ajax({
+                url: "/todo/checkphone",
+                type: "POST",
+                data: {"tel":temp},
+                //dataType: "json",
+
+                success: function (result) {
+                    console.log(result);
+
+                    if(result === "success"){
+                        console.log("aaaaaaa");
+                        $('#errorTel').empty(); // 清空resText里面的所有内容
+                        $("#errorTel").text("号码已存在");
+                    }
+                    else{
+                        $('#errorTel').empty();
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    /*错误信息处理*/
+                    alert("进入error---");
+                    alert("状态码："+xhr.status);
+                    alert("状态:"+xhr.readyState);//当前状态,0-未初始化，1-正在载入，2-已经载入，3-数据进行交互，4-完成。
+                    alert("错误信息:"+xhr.statusText );
+                    alert("返回响应信息："+xhr.responseText );//这里是详细的信息
+                    alert("请求状态："+textStatus);
+                    alert(errorThrown);
+                    alert("请求失败");
+                    $("#errorTel").text("")
+                    alert('错误！');
+                }
+            })
+        }))
+</script>
