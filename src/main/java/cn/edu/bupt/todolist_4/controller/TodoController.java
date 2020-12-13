@@ -55,7 +55,7 @@ public class TodoController {
 
         System.out.println("控制器端接收到的tel="+tel);
 
-        String result="";
+        String result="empty";
         for (Todo each:todos
         ) {
             System.out.println(each.getTel());

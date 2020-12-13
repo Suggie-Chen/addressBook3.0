@@ -31,7 +31,8 @@
 
             <label for="tel" >tel:</label>
             <input type="tel" class="form-control" id="tel" name="tel" autocomplete="off " >
-            <text id="errorTel">这里是提示信息：</text>
+            <text id="errorTel" style="color:palevioletred"></text>
+            <br>
 
             <label for="QQ">QQ:</label>
             <input type="text" class="form-control" id="QQ" name="QQ">
@@ -40,11 +41,11 @@
             <input type="email" class="form-control" id="email" name="email">
 
             <label for="address">address:</label>
-            <input type="text" class="form-control" id="address" name="address">
+            <input type="text" class="form-control" id="address" name="address"  >
 
 
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" id='btnSubmit' class="btn btn-primary">Submit</button>
     </form>
 </div>
 
@@ -68,9 +69,15 @@
                     console.log(result);
 
                     if(result === "success"){
-                        console.log("aaaaaaa");
+
                         $('#errorTel').empty(); // 清空resText里面的所有内容
                         $("#errorTel").text("号码已存在");
+                        $("#btnSubmit").attr("disabled",true);
+                    }
+                    else if(result==="empty"){
+                        $('#errorTel').empty(); // 清空resText里面的所有内容
+                        $("#errorTel").text("号码不能为空");
+                        $("#btnSubmit").attr("disabled",true);
                     }
                     else{
                         $('#errorTel').empty();
