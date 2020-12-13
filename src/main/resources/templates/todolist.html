@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>TodoList</title>
+    <title>通讯录</title>
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -17,8 +17,9 @@
 </head>
 <body>
 <div class="container">
-    <h2>TodoList</h2>
-    <a class="btn btn-primary float-right" href="./todoadd.html" th:href="@{/todo/add}">Add</a>
+    <h2>通讯录</h2>
+    <a class="btn btn-primary float-right" href="./todoadd.html" th:href="@{/add}">Add</a>
+    <a class="btn btn-primary float-right" href="./logout.html" th:href="@{/logout}">Logout</a>
     <table class="table">
         <thead>
         <tr>
@@ -39,9 +40,9 @@
             <td th:text="${todo.email}">上午8点教二240上课</td>
             <td>
                 <a type="button" class="btn btn-xs btn-success" href="./todoedit.html?todoId=1"
-                   th:href="@{/todo/edit(todoId=${todo.id})}">编辑</a>
+                   th:href="@{/edit(todoId=${todo.id})}">编辑</a>
                 <a type="button" class="btn  btn-xs btn-danger" href="./tododel?todoId=1"
-                   th:href="@{/todo/delete(todoId=${todo.id})}">删除</a>
+                   th:href="@{/delete(todoId=${todo.id})}">删除</a>
             </td>
         </tr>
 <!--        <tr>-->
@@ -54,10 +55,10 @@
 <!--        </tr>-->
         </tbody>
         <div>
-            <a th:href="@{/todo/list(start=0)}">[首页]</a>
-            <a th:if="${not todos.isFirst()}" th:href="@{/todo/list(start=${todos.number-1})}">[上页]</a>
-            <a th:if="${not todos.isLast()}" th:href="@{/todo/list(start=${todos.number+1})}">[下页]</a>
-            <a th:href="@{/todo/list(start=${todos.totalPages-1})}">[末页]</a>
+            <a th:href="@{/list(start=0)}">[首页]</a>
+            <a th:if="${not todos.isFirst()}" th:href="@{/list(start=${todos.number-1})}">[上页]</a>
+            <a th:if="${not todos.isLast()}" th:href="@{/list(start=${todos.number+1})}">[下页]</a>
+            <a th:href="@{/list(start=${todos.totalPages-1})}">[末页]</a>
         </div>
     </table>
 </div>

@@ -21,13 +21,14 @@
 <body>
 <div class="container">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="./todolist.html" th:href="@{/todo/list}">Home</a></li>
+        <li class="breadcrumb-item"><a href="./todolist.html" th:href="@{/list}">Home</a></li>
         <li class="breadcrumb-item active">Add</li>
     </ol>
-    <form action="/todo/add" method="post" th:action="@{/todo/add}">
+    <form action="/add" method="post" th:action="@{/add}">
         <div class="form-group">
             <label for="name">name:</label>
             <input type="text" class="form-control" id="name" name="name">
+            <br>
 
             <label for="tel" >tel:</label>
             <input type="tel" class="form-control" id="tel" name="tel" autocomplete="off " >
@@ -36,9 +37,11 @@
 
             <label for="QQ">QQ:</label>
             <input type="text" class="form-control" id="QQ" name="QQ">
+            <br>
 
             <label for="email">email:</label>
             <input type="email" class="form-control" id="email" name="email">
+            <br>
 
             <label for="address">address:</label>
             <input type="text" class="form-control" id="address" name="address"  >
@@ -60,7 +63,7 @@
             var temp = $("#tel").val()
             console.log("hahahahahahahahah"+temp)
             $.ajax({
-                url: "/todo/checkphone",
+                url: "/checkphone",
                 type: "POST",
                 data: {"tel":temp},
                 //dataType: "json",
@@ -69,7 +72,6 @@
                     console.log(result);
 
                     if(result === "success"){
-
                         $('#errorTel').empty(); // 清空resText里面的所有内容
                         $("#errorTel").text("号码已存在");
                         $("#btnSubmit").attr("disabled",true);
@@ -81,6 +83,8 @@
                     }
                     else{
                         $('#errorTel').empty();
+                        $("#errorTel").text("");
+                        $("#btnSubmit").attr("disabled",false);
                     }
 
                 },
