@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>通讯录管理系统</title>
+    <link rel="stylesheet"  href="../login.css" th:href="@{css/login.css}">  <!--注意    -->
+
+</head>
+
+<body>
+<!-- <div class="title" text-align:center>  -->
+<div  class = "loginPage">
+    login <br>
+    <!--            <form  action="addressBook.html" action="addressBook.html" >-->
+    <form  th:action="@{login}" method="post">
+        username: <label>
+        <input type="text" name="username" required="请输入用户名">
+    </label><br>
+        password: <label>
+        <input type="password" name="password" required="请输入密码">
+    </label><br>
+        <input type="submit" value="登录"  style="height:40px; width:80px">
+    </form>
+    <div class="test"  style="font-size:10px;">
+        测试用户名：admin<br>
+        测试密码：123456
+    </div>
+</div>
+</body>
+</html>
